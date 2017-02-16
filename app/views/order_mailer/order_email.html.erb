@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Thank you from ordering from Jungle.</h1>
+    <p>
+      You have successfully purchsed from jungle.com.
+      <br>
+    </p>
+    <p>
+      Here is your order summary:
+    </p>
+    <div class="panel panel-default items">
+    <div>Email: <%= @order.email %></div>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @order.line_items.each do |line_item| %>
+          <%= render 'receipt', line_item: line_item %>
+          <% end %>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th colspan="4">
+              TOTAL:
+            </th>
+            <th>
+              <%= @order.total_cents %>
+            </th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+    <p>Thanks for buying from us and have a great day!</p>
+  </body>
+</html>

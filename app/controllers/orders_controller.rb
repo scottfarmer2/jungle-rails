@@ -2,9 +2,23 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+    OrderMailer.order_email(@order).deliver_later
   end
 
   def create
+
+    @order = Order.new(params[:order])
+
+    # respond_to do |format|
+    #   if @order.save
+
+
+    #     format.html { redirect_to(@order, notice: 'Order was successful.') }
+    #   else
+    #     format.html { render action: 'new' }
+    #   end
+    #end
+
     charge = perform_stripe_charge
     order  = create_order(charge)
 
