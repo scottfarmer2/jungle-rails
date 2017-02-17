@@ -1,7 +1,7 @@
 class Admin::CategoriesController < ApplicationController
 
-  http_basic_authenticate_with name: ENV["ADMIN_USERNAME"], password: ENV["ADMIN_PASSWORD"]
 
+  before_filter :authenticate
 
   def index
     @categories = Category.order(id: :desc).all
@@ -23,6 +23,12 @@ class Admin::CategoriesController < ApplicationController
 
 
   private
+
+  def authenticate
+    authenticate_or_request_with_http_basic do |name, password|
+      name == ENV["ADMIN_USERNAME"] && password == ENV["ADMIN_PASSWORD"]
+    end
+  end
 
   def category_params
     params.require(:category).permit(
