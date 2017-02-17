@@ -1,3 +1,17 @@
+<% if cart.size == 0 %>
+
+  <header class="page-header">
+    <h1>My Cart</h1>
+  </header>
+
+  <div class="order-summary jumbotron">
+    <h4>You need to have items in your cart before preceding. FUCKER</h4>
+  </div>
+
+  <%= link_to 'Back to Home', products_path %>
+
+<% else %>
+
 <section class="cart-show">
 
   <header class="page-header">
@@ -51,3 +65,4 @@
   </div>
 
 </section>
+<% end %>
