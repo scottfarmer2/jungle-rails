@@ -8,6 +8,17 @@
 
 puts "Seeding Data ..."
 
+User.all.each do |n|
+  User.create!({
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    email: Faker::Internet.email,
+    password: 'password'
+  })
+end
+
+puts 'done'
+
 # Helper functions
 def open_asset(file_name)
   File.open(Rails.root.join('db', 'seed_assets', file_name))
@@ -134,3 +145,26 @@ cat3.products.create!({
 
 
 puts "DONE!"
+
+
+## Review
+
+puts "Re-creating Reviews ..."
+
+Review.destroy_all
+
+
+Product.all.each do |p|
+  usr = rand(1..10)
+  rate = rand(0..10)
+
+  Review.create!({
+    product_id: p.id,
+    user_id: usr,
+    description: Faker::ChuckNorris.fact,
+    rating: rate
+  })
+end
+
+
+
