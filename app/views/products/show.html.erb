@@ -22,17 +22,60 @@
           <dd><%= @product.quantity %></dd>
           <dt>Price</dt>
           <dd><%= @product.price %></dd>
-          <% @reviews.each do |r| %>
+        </dl>
+      </div>
+    </div>
+  </article>
+
+<% if current_user %>
+
+  <article class="product-detail">
+    <div class="">
+    <%= form_for [@product, @review] do |f| %>
+
+      <% if @review.errors.any? %>
+        <div id="error_explanation">
+          <h2>
+            <%= pluralize(@review.errors.count, "error") %> prohibited
+            this review from being saved:
+          </h2>
+          <ul>
+            <% @review.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="form-group">
+        <%= f.label :rating %>
+        <%= f.select :rating, ['1','2','3','4','5','6','7','8','9','10'], class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :description %><br>
+        <%= f.text_area :description, class: "form-control" %>
+      </div>
+
+      <p><%= f.submit %></p>
+    <% end %>
+    </div>
+    <div class="col-sm-5">
+    <dl class="dl-horizontal">
+      <% @product.reviews.reverse_each do |r| %>
+        <% if current_user == r.user %>
+          <%= button_to "TERRIBLE", product_review_path(product_id: r[:product_id], id: r[:id]), method: "delete", data: { confirm: 'Are you sure?' } %>
+          <% end %>
             <dt>Rating</dt>
             <dd><%= r.rating %></dd>
             <dt>Review descripting</dt>
             <dd><%= r.description %></dd>
-          <% end %>
-          </dd>
-        </dl>
-      </div>
+
+      <% end %>
+    </dl>
     </div>
 
+<% end %>
   </article>
 
 </section>
