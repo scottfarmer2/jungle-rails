@@ -11,10 +11,10 @@ class ReviewsController < ApplicationController
     @review.user = current_user
 
     if @review.save
-      redirect_to :back
+      redirect_to controller: 'products', action: 'show', id: @review.product_id
     else
       @product.reviews.reload
-      redirect_to '/products', notice: "You have to fuck off"
+      render 'products/show'
     end
   end
 
