@@ -9,6 +9,7 @@ RSpec.describe User, type: :model do
                        first_name: "John",
                        last_name: "Wayne",
                        email: "test@test.com",
+                       email_confirmation: "test@test.com",
                        password: @password,
                        password_confirmation: @password
                        )
@@ -16,6 +17,7 @@ RSpec.describe User, type: :model do
                        first_name: "Jane",
                        last_name: "Wayne",
                        email: "test@test.com",
+                       email_confirmation: "test@test.com",
                        password: @password,
                        password_confirmation: @password
                        )
@@ -84,6 +86,7 @@ RSpec.describe User, type: :model do
                        first_name: "John",
                        last_name: "Wayne",
                        email: "test@test.com",
+                       email_confirmation: "test@test.com",
                        password: @password,
                        password_confirmation: @password
                        )
@@ -91,6 +94,7 @@ RSpec.describe User, type: :model do
                        first_name: "Master",
                        last_name: "Chief",
                        email: "test2@test.com",
+                       email_confirmation: "test@test.com",
                        password: @password,
                        password_confirmation: @password
                        )
