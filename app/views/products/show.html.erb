@@ -26,8 +26,25 @@
       </div>
     </div>
   </article>
+  <div> ======================================================================== </div>
 
-<% if current_user %>
+
+    <h2>Buyer's Reviews</h2>
+    <div class="col-sm-5">
+    <dl class="dl-horizontal">
+      <% @product.reviews.reverse_each do |r| %>
+        <% if current_user == r.user %>
+          <%= button_to "Remove", product_review_path(product_id: r[:product_id], id: r[:id]), method: "delete", data: { confirm: 'Are you sure?' } %>
+          <% end %>
+            <dt>Rating</dt>
+            <dd><%= r.rating %></dd>
+            <dt>Review descripting</dt>
+            <dd><%= r.description %></dd>
+
+      <% end %>
+    </dl>
+    </div>
+  <% if current_user %>
 
   <article class="product-detail">
     <div class="">
@@ -57,23 +74,14 @@
         <%= f.text_area :description, class: "form-control" %>
       </div>
 
-      <p><%= f.submit %></p>
+      <p><%= f.submit "Submit", class: "btn btn-default btn-primary" %></p>
     <% end %>
-    </div>
-    <div class="col-sm-5">
-    <dl class="dl-horizontal">
-      <% @product.reviews.reverse_each do |r| %>
-        <% if current_user == r.user %>
-          <%= button_to "Remove", product_review_path(product_id: r[:product_id], id: r[:id]), method: "delete", data: { confirm: 'Are you sure?' } %>
-          <% end %>
-            <dt>Rating</dt>
-            <dd><%= r.rating %></dd>
-            <dt>Review descripting</dt>
-            <dd><%= r.description %></dd>
 
-      <% end %>
-    </dl>
+
     </div>
+
+
+
 
 <% end %>
   </article>

@@ -22,6 +22,11 @@
 
   </aside>
 
+  <aside class="rating">
+    Rating: <%= product.reviews.average(:rating) %>
+
+  </aside>
+
   <% if product.quantity == 0 %>
   <aside class="sold_out">
     <p>Sold out</p>
