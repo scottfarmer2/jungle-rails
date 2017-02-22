@@ -34,7 +34,7 @@
     <dl class="dl-horizontal">
       <% @product.reviews.reverse_each do |r| %>
         <% if current_user == r.user %>
-          <%= button_to "Remove", product_review_path(product_id: r[:product_id], id: r[:id]), method: "delete", data: { confirm: 'Are you sure?' } %>
+          <%= button_to "Remove", product_review_path(product_id: r[:product_id], id: r[:id]), method: "delete", class: "btn btn-default btn-primary", data: { confirm: 'Are you sure?' } %>
           <% end %>
             <dt>Rating</dt>
             <dd><%= r.rating %></dd>
@@ -45,7 +45,8 @@
     </dl>
     </div>
   <% if current_user %>
-
+  <div class="col-sm-5">
+  <h3>Add review</h3>
   <article class="product-detail">
     <div class="">
     <%= form_for [@product, @review] do |f| %>
@@ -65,25 +66,20 @@
       <% end %>
 
       <div class="form-group">
-        <%= f.label :rating %>
-        <%= f.select :rating, ['1','2','3','4','5','6','7','8','9','10'], class: 'form-control' %>
+        <%= f.label :description %><br>
+        <%= f.text_area :description, class: "form-control" %>
       </div>
 
       <div class="form-group">
-        <%= f.label :description %><br>
-        <%= f.text_area :description, class: "form-control" %>
+        <%= f.label :rating %>
+        <%= f.select :rating, ['1','2','3','4','5','6','7','8','9','10'], class: 'form-control' %>
       </div>
 
       <p><%= f.submit "Submit", class: "btn btn-default btn-primary" %></p>
     <% end %>
 
-
     </div>
-
-
-
-
-<% end %>
+  <% end %>
   </article>
-
+</div>
 </section>
