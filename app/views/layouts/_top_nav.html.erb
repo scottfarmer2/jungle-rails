@@ -41,7 +41,11 @@
         </li>
         <li>
           <%= link_to cart_path do %>
-            <%= fa_icon "shopping-cart" %> My Cart (<%= cart.size %>)
+            <% @cartshow = 0 %>
+             <% cart.each do |i| %>
+             <% @cartshow += i[1]['quantity'] %>
+             <% end %>
+            <%= fa_icon "shopping-cart" %> My Cart (<%= @cartshow %>)
           <% end %>
         </li>
         <% if current_user %>
